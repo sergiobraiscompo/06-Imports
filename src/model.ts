@@ -53,8 +53,6 @@ export const carta_img_element = document.getElementById("carta");
 export const cartas_folder = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/";
 
 
-
-
 // Suma la puntuación de la carta
 export const cambiaPuntuacion = (nueva_puntuacion: number) => {
     puntuacion += nueva_puntuacion;

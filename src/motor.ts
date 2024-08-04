@@ -1,5 +1,5 @@
 import { cambiaPuntuacion} from "./model";
-import { muestraPuntuacion } from "./ui";
+import { dameCarta, muestraPuntuacion } from "./ui";
 
 // Suma la puntuación de la carta
 export const sumarPuntuacion = (carta: number) => {
@@ -72,4 +72,37 @@ export const cartaAleatoria = (): number => {
     } else {
         return generarNumero + 1;
     }
+};
+
+// Función para ver las siguientes cartas tras terminar la partida
+export const queHabriaPasado = () => {
+    dameCarta();
+}
+
+// Crea una nueva partida
+export const creaNuevaPartida = () => {
+
+    // Habilita y cambia de nuevo la clase a "button" a los botones Pedir carta y me planto
+    if (boton_pedir_carta instanceof HTMLButtonElement && mePlantoBoton instanceof HTMLButtonElement) {
+        boton_pedir_carta.disabled = false;
+        boton_pedir_carta.className = "button";
+        
+        mePlantoBoton.disabled = false;
+        mePlantoBoton.className = "button";
+    }
+
+    // Elimina los botones nueva partida y que habria pasado
+    if (boton_nueva_partida instanceof HTMLButtonElement && boton_que_habria_pasasdo instanceof HTMLButtonElement) {
+        boton_nueva_partida.remove();
+        boton_que_habria_pasasdo.remove();
+    }
+
+
+    // Vacía el campo del mensaje
+    if (mensaje_element instanceof HTMLDivElement)
+    mensaje_element.innerHTML = "";
+
+    puntuacion = 0;
+    muestraPuntuacion();
+    muestraCartaPorDefecto();
 };

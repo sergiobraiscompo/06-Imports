@@ -1,3 +1,4 @@
+import { queHabriaPasado } from "./motor";
 import {dameCarta, plantarse} from "./ui"
 
 
@@ -10,6 +11,10 @@ export const handle_click = (boton: string) => {
         }
         case "mePlanto": {
             plantarse();
+        }
+        case "queHabriaPasado": {
+            queHabriaPasado();
+            break;
         }
     }
 };

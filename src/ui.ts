@@ -6,19 +6,20 @@ import {
     caballo_copas, rey_copas, carta_boca_abajo
 } from "./model";
 
-import { cartaAleatoria, sumarPuntuacion } from "./motor";
+import { cartaAleatoria, queHabriaPasado, sumarPuntuacion } from "./motor";
 import { handle_click } from "./shell";
 
+// Elementos HTML
+const mensaje_element = document.getElementById("mensaje");
+const tablero_element = document.getElementById("tablero");
+const puntuacion_element = document.getElementById("puntuacion");
+const contenedor_botones_element = document.getElementById("contenedor-botones");
 
+// Botones de la web
+export const boton_nueva_partida = document.getElementById("boton-nueva-partida");
+export const boton_que_habria_pasasdo = document.getElementById("boton-que-habria-pasado");
+const boton_pedir_carta = document.getElementById("pedir_carta");
 
-// Elementos HTML contenedores
-export const mensaje_element = document.getElementById("mensaje");
-export const puntuacion_element = document.getElementById("puntuacion");
-export const tablero_element = document.getElementById("tablero-display");
-
-// elementos HTML botones
-export const nueva_partida_boton = document.getElementById("nueva_partida");
-export const boton_pedir_carta = document.getElementById("pedir_carta");
 
 // Botón pedir carta
 const pedirCartaBoton = document.getElementById("pedir_carta");
@@ -48,21 +49,27 @@ export const muestraPuntuacion = () => {
 };
 
 
-export const gameOver = () => {
-    let  mensaje = "";
+let partidaAcabada: boolean = false;
+
+const gameOver = () => {
+    let  mensaje: string = "";
     
     if (boton_pedir_carta instanceof HTMLButtonElement && mePlantoBoton instanceof HTMLButtonElement) {
         boton_pedir_carta.disabled = true
+        boton_pedir_carta.className = "disabled-button";
+
         mePlantoBoton.disabled = true
+        mePlantoBoton.className = "disabled-button";
+        creaBotonQueHabriaPasado();
     };
     
-    if (mensaje_element) {
+    if (mensaje_element && !partidaAcabada) {
         mensaje = "Has hecho más de 7 puntos y medio, partida terminada.";
+        partidaAcabada = true;
         mensaje_element.innerHTML = mensaje;
     }
 
     creaBotonNuevaPartida();
-    
 };
 
 
@@ -78,6 +85,20 @@ export const creaBotonNuevaPartida = () => {
     // Añadiendo el botón nueva partida en pantalla
     console.log("Creando botón nueva partida");
     tablero_element?.appendChild(nueva_partida_boton);
+};
+
+// Crea botón queHabriaPasado
+const creaBotonQueHabriaPasado = () => {
+    const que_habria_pasado_boton = document.createElement("button");
+
+    que_habria_pasado_boton.innerText = "¿Qué habría pasado?";
+    que_habria_pasado_boton.id = "boton-que-habria-pasado";
+    que_habria_pasado_boton.className = "boton-que-habria-pasado";
+    que_habria_pasado_boton.onclick = () => queHabriaPasado();
+
+    // Añadiendo el botón nueva partida en pantalla
+    console.log("Creando botón queHabriaPasado");
+    contenedor_botones_element?.appendChild(que_habria_pasado_boton);
 };
 
 

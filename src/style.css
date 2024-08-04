@@ -1,30 +1,93 @@
-.tablero-display {
+* {
+  box-sizing: border-box;
+}
+
+body {
   display: flex;
+  height: 100%;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 5rem 1rem;
+  padding: 0;
+  background-color: rgb(1, 104, 1);
 }
 
-.puntuacion, .mensaje {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
+.tablero-display {
+  border: dotted 5px white;
+  display: flex;
+  justify-content: space-around;
+  margin: .5rem;
 }
 
-.texto-turno {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
+.puntuacion {
+  margin: .5rem;
+  height: fit-content;
+  color: red;
+  border: 5px dotted white;
+  -webkit-text-stroke: 2px white;
+  text-transform: uppercase;
   text-align: center;
+  font-weight: bolder;
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.mensaje {
+  color: white;
+  -webkit-text-stroke: 1px white;
+  text-align: center;
+  font-size: 50px;
 }
 
 .carta {
-  margin: 1rem;
-  width: 8rem;
-  height: 12rem;
+  margin: .5rem;
+  height: 500px;
+  border-top: 3px white solid;
+  border-bottom: 3px white solid;
+  border-left: 4px white solid;
+  border-right: 4px white solid;
+}
+
+.contenedor-botones {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  height: fit-content;
+  padding: 1rem;
+  margin: .5rem;
+  /* border: 1px solid orange; */
+}
+
+button {
+  border: none;
+  color: white;
+  margin: .5rem;
+  text-decoration: none;
+  background: none;
+  font-size: 2rem;
+  /* border: white 1px solid; */
+}
+
+.boton_nueva_partida {
+  border: black 1rem solid;
+  font-size: 2rem;
+  color: black;
+}
+
+button:hover {
+  color: red;
+  font-style: italic;
+  text-shadow: 1px gray;
+}
+
+.disabled-button {
+  color: gray;
+  font-style: italic;
+}
+
+.disabled-button:hover {
+  color: gray;
+  text-decoration: line-through;
+  font-weight: bolder;
+  font-style: italic;
+  text-shadow: 1px gray;
 }

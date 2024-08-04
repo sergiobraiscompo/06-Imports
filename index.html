@@ -8,13 +8,18 @@
     <title>Vite + TS</title>
   </head>
   <body>
+    <div id="puntuacion" class="puntuacion"></div>
+    <div id="mensaje" class="mensaje">Mensaje de prueba</div>
+    
     <div id="tablero-display" class="tablero-display">
-      <div id="puntuacion" class="puntuacion"></div>
       <img id="carta" class="carta"></img>
-      <div id="mensaje"></div>
+      
+      <div class="contenedor-botones" id="contenedor-botones">
+        <button id="pedir_carta" class="boton">Pedir Carta</button>
+        <button id="me_planto" class="boton">Me planto</button>
+      </div>
+    </div>
 
-      <button id="pedir_carta" class="boton">Pedir Carta</button>
-      <button id="me_planto" class="boton">Me planto</button>
 
     <script type="module" src="/src/main.ts"></script>
   </body>
