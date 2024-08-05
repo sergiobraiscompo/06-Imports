@@ -1,5 +1,4 @@
-import { queHabriaPasado } from "./motor";
-import {dameCarta, plantarse} from "./ui"
+import { queHabriaPasado, dameCarta, plantarse } from "./motor";
 
 
 // Gestionar click

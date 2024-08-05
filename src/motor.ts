@@ -1,5 +1,30 @@
-import { cambiaPuntuacion} from "./model";
-import { dameCarta, muestraPuntuacion } from "./ui";
+import { cambiaPuntuacion, mensaje, partidaPorDefecto, puntuacion } from "./model";
+import { boton_nueva_partida, boton_pedir_carta, boton_que_habria_pasasdo, creaBotonNuevaPartida, creaBotonQueHabriaPasado, mensaje_element, mePlantoBoton, mostrarCarta, muestraCartaPorDefecto, muestraPuntuacion } from "./ui";
+
+
+
+let partidaAcabada: boolean = false;
+
+const gameOver = () => {
+
+    
+    if (boton_pedir_carta instanceof HTMLButtonElement && mePlantoBoton instanceof HTMLButtonElement) {
+        boton_pedir_carta.disabled = true
+        boton_pedir_carta.className = "disabled-button";
+
+        mePlantoBoton.disabled = true
+        mePlantoBoton.className = "disabled-button";
+        creaBotonQueHabriaPasado();
+    };
+    
+    if (mensaje_element && !partidaAcabada) {
+        mensaje = "Has hecho más de 7 puntos y medio, partida terminada.";
+        partidaAcabada = true;
+        mensaje_element.innerHTML = mensaje;
+    }
+
+    creaBotonNuevaPartida();
+};
 
 // Suma la puntuación de la carta
 export const sumarPuntuacion = (carta: number) => {
@@ -62,6 +87,49 @@ export const sumarPuntuacion = (carta: number) => {
     muestraPuntuacion();
 };
 
+
+// Genera un número aleatorio y devuelve una carta
+export const dameCarta = () => {
+
+    // Llamada a la función recibir número aleatorio
+    let nuevo_numero = cartaAleatoria();
+
+    mostrarCarta(nuevo_numero);
+    sumarPuntuacion(nuevo_numero);
+
+    if (puntuacion > 7.5 && !partidaAcabada) {
+        gameOver();
+    }
+};
+
+
+// Llama a gameover y muestra un mensaje en pantalla
+export const plantarse = () => {
+    gameOver();
+
+    if (puntuacion === 7.5){
+        mensaje = "¡Lo has clavado! ¡Enhorabuena!";
+    }
+
+    if (puntuacion === 6 || puntuacion === 7){
+        mensaje = "Casi casi ...";
+    }
+
+    if (puntuacion === 5){
+        mensaje = "Te ha entrado el canguelo eh?";
+    }
+
+    if (puntuacion <= 4){
+        mensaje = "Has sido muy conservador";
+    }
+
+    if (mensaje_element) {
+        mensaje_element.innerHTML = mensaje;
+    }
+
+    creaBotonNuevaPartida;
+};
+
 // Generar carta aleatoria
 export const cartaAleatoria = (): number => {
     let generarNumero = Math.floor(Math.random() * (12 - 1));
@@ -97,12 +165,8 @@ export const creaNuevaPartida = () => {
         boton_que_habria_pasasdo.remove();
     }
 
-
-    // Vacía el campo del mensaje
-    if (mensaje_element instanceof HTMLDivElement)
-    mensaje_element.innerHTML = "";
-
-    puntuacion = 0;
+    
+    partidaPorDefecto();
     muestraPuntuacion();
     muestraCartaPorDefecto();
 };

@@ -1,3 +1,5 @@
+import { boton_nueva_partida, boton_que_habria_pasasdo } from "./ui";
+
 // Objeto Partida
 interface Partida {
     puntuacion: number;
@@ -59,9 +61,18 @@ export const cambiaPuntuacion = (nueva_puntuacion: number) => {
     console.log(puntuacion);
 }
 
-export const reiniciaPuntuacion = () => {
-    puntuacion = 0;
+export const partidaPorDefecto = () => {
+    puntuacion = nuevaPartida.puntuacion;
+    carta = nuevaPartida.carta;
+    puntuacion = nuevaPartida.puntuacion;
+
+    // Elimina los botones nueva partida y que habria pasado
+    if (boton_nueva_partida instanceof HTMLButtonElement && boton_que_habria_pasasdo instanceof HTMLButtonElement) {
+        boton_nueva_partida.remove();
+        boton_que_habria_pasasdo.remove();
+    }
 }
 
 export let puntuacion = nuevaPartida.puntuacion;
 export let carta = nuevaPartida.carta;
+export let mensaje = nuevaPartida.mensaje;
