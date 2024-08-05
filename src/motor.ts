@@ -1,26 +1,22 @@
-import { cambiaPuntuacion, mensaje, partidaPorDefecto, puntuacion } from "./model";
-import { boton_nueva_partida, boton_pedir_carta, boton_que_habria_pasasdo, creaBotonNuevaPartida, creaBotonQueHabriaPasado, mensaje_element, mePlantoBoton, mostrarCarta, muestraCartaPorDefecto, muestraPuntuacion } from "./ui";
-
+import { cambiaMensaje, cambiaPuntuacion, partidaPorDefecto, puntuacion } from "./model";
+import { boton_nueva_partida, boton_que_habria_pasasdo, creaBotonNuevaPartida, creaBotonQueHabriaPasado, mensaje_element, mostrarCarta, muestraCartaPorDefecto, muestraPuntuacion, boton_pedir_carta, boton_me_planto } from "./ui";
 
 
 let partidaAcabada: boolean = false;
 
 const gameOver = () => {
-
-    
-    if (boton_pedir_carta instanceof HTMLButtonElement && mePlantoBoton instanceof HTMLButtonElement) {
+    if (boton_pedir_carta instanceof HTMLButtonElement && boton_me_planto instanceof HTMLButtonElement) {
         boton_pedir_carta.disabled = true
         boton_pedir_carta.className = "disabled-button";
 
-        mePlantoBoton.disabled = true
-        mePlantoBoton.className = "disabled-button";
+        boton_me_planto.disabled = true
+        boton_me_planto.className = "disabled-button";
         creaBotonQueHabriaPasado();
     };
     
     if (mensaje_element && !partidaAcabada) {
-        mensaje = "Has hecho más de 7 puntos y medio, partida terminada.";
+        cambiaMensaje("Has hecho más de 7 puntos y medio, partida terminada.");
         partidaAcabada = true;
-        mensaje_element.innerHTML = mensaje;
     }
 
     creaBotonNuevaPartida();
@@ -108,23 +104,19 @@ export const plantarse = () => {
     gameOver();
 
     if (puntuacion === 7.5){
-        mensaje = "¡Lo has clavado! ¡Enhorabuena!";
+        cambiaMensaje("¡Lo has clavado! ¡Enhorabuena!");
     }
 
     if (puntuacion === 6 || puntuacion === 7){
-        mensaje = "Casi casi ...";
+        cambiaMensaje("Casi casi ...");
     }
 
     if (puntuacion === 5){
-        mensaje = "Te ha entrado el canguelo eh?";
+        cambiaMensaje("Te ha entrado el canguelo eh?");
     }
 
     if (puntuacion <= 4){
-        mensaje = "Has sido muy conservador";
-    }
-
-    if (mensaje_element) {
-        mensaje_element.innerHTML = mensaje;
+        cambiaMensaje("Has sido muy conservador");
     }
 
     creaBotonNuevaPartida;
@@ -151,14 +143,17 @@ export const queHabriaPasado = () => {
 export const creaNuevaPartida = () => {
 
     // Habilita y cambia de nuevo la clase a "button" a los botones Pedir carta y me planto
-    if (boton_pedir_carta instanceof HTMLButtonElement && mePlantoBoton instanceof HTMLButtonElement) {
+    if (boton_pedir_carta instanceof HTMLButtonElement && boton_me_planto instanceof HTMLButtonElement) {
         boton_pedir_carta.disabled = false;
         boton_pedir_carta.className = "button";
         
-        mePlantoBoton.disabled = false;
-        mePlantoBoton.className = "button";
+        boton_me_planto.disabled = false;
+        boton_me_planto.className = "button";
     }
 
+    const boton_nueva_partida = document.getElementById("boton-nueva-partida");
+    const boton_que_habria_pasasdo = document.getElementById("boton-que-habria-pasado");
+    
     // Elimina los botones nueva partida y que habria pasado
     if (boton_nueva_partida instanceof HTMLButtonElement && boton_que_habria_pasasdo instanceof HTMLButtonElement) {
         boton_nueva_partida.remove();

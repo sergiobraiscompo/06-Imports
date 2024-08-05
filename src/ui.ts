@@ -18,16 +18,15 @@ export const contenedor_botones_element = document.getElementById("contenedor-bo
 // Botones de la web
 export const boton_nueva_partida = document.getElementById("boton-nueva-partida");
 export const boton_que_habria_pasasdo = document.getElementById("boton-que-habria-pasado");
-export const boton_pedir_carta = document.getElementById("pedir_carta");
 
 
 // Botón pedir carta
-export const pedirCartaBoton = document.getElementById("pedir_carta");
-pedirCartaBoton?.addEventListener("click", () => handle_click("pedirCarta"));
+export const boton_pedir_carta = document.getElementById("pedir_carta");
+boton_pedir_carta?.addEventListener("click", () => handle_click("pedirCarta"));
 
 // Botón mePlanto
-export const mePlantoBoton = document.getElementById("me_planto");
-mePlantoBoton?.addEventListener("click", () => handle_click("mePlanto"));
+export const boton_me_planto = document.getElementById("me_planto");
+boton_me_planto?.addEventListener("click", () => handle_click("mePlanto"));
 
 
 
@@ -35,7 +34,6 @@ mePlantoBoton?.addEventListener("click", () => handle_click("mePlanto"));
 export const muestraCartaPorDefecto = () => {
     if (carta_img_element instanceof HTMLImageElement) {
         carta_img_element.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/" + carta_boca_abajo;
-        console.log(cartas_folder + carta_boca_abajo);
     }
 };
 
@@ -52,16 +50,15 @@ export const muestraPuntuacion = () => {
 // Crea el botón nueva partida
 export const creaBotonNuevaPartida = () => {
     const nueva_partida_boton = document.createElement("button");
-
     nueva_partida_boton.innerText = "Nueva Partida";
-    nueva_partida_boton.id = "boton_nueva_partida";
-    nueva_partida_boton.className = "boton";
+    nueva_partida_boton.id = "boton-nueva-partida";
+    nueva_partida_boton.className = "boton-nueva-partida";
     nueva_partida_boton.onclick = () => creaNuevaPartida();
 
     // Añadiendo el botón nueva partida en pantalla
-    console.log("Creando botón nueva partida");
     contenedor_botones_element?.appendChild(nueva_partida_boton);
 };
+
 
 // Crea botón queHabriaPasado
 export const creaBotonQueHabriaPasado = () => {
@@ -73,7 +70,6 @@ export const creaBotonQueHabriaPasado = () => {
     que_habria_pasado_boton.onclick = () => queHabriaPasado();
 
     // Añadiendo el botón nueva partida en pantalla
-    console.log("Creando botón queHabriaPasado");
     contenedor_botones_element?.appendChild(que_habria_pasado_boton);
 };
 
@@ -86,78 +82,57 @@ export const mostrarCarta = (carta: number) : void => {
     // Devolver carta aleatoria
     switch (carta) {
         case 1: {
-            console.log("Carta 1.");
-            console.log(ruta_carta);
             ruta_carta = cartas_folder + as_copas;
             break;
         }
 
         case 2: {
-            console.log("Carta 2.");
-            console.log(ruta_carta);
             ruta_carta = cartas_folder + dos_copas;
             break;
         }
 
         case 3: {
-            console.log("Carta 3.");
-            console.log(ruta_carta);
             ruta_carta = cartas_folder + tres_copas;
             break;
         }
 
         case 4: {
-            console.log("Carta 4.");
-            console.log(ruta_carta);
             ruta_carta = cartas_folder + cuatro_copas;
             break;
         }
 
         case 5: {
-            console.log("Carta 5.");
-            console.log(ruta_carta);
             ruta_carta = cartas_folder + cinco_copas;
             break;
         }
 
         case 6: {
-            console.log("Carta 6.");
-            console.log(ruta_carta);
             ruta_carta = cartas_folder + seis_copas;
             break;
         }
 
         case 7: {
-            console.log("Carta 7.");
-            console.log(ruta_carta);
             ruta_carta = cartas_folder + siete_copas;
             break;
         }
 
         case 10: {
-            console.log("Sota.");
-            console.log(ruta_carta);
             ruta_carta = cartas_folder + sota_copas;
             break;
         }
 
         case 11: {
-            console.log("Caballo.");
-            console.log(ruta_carta);
             ruta_carta = cartas_folder + caballo_copas;
             break;
         }
 
         case 12: {
-            console.log("Rey.");
-            console.log(ruta_carta);
             ruta_carta = cartas_folder + rey_copas;
             break;
         }
 
         default: {
             ruta_carta = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/" + carta_boca_abajo;
-            console.log(ruta_carta);
             break;
         }
     };
