@@ -1,8 +1,6 @@
-import { cambiaMensaje, cambiaPuntuacion, partidaPorDefecto, puntuacion } from "./model";
-import { boton_nueva_partida, boton_que_habria_pasasdo, creaBotonNuevaPartida, creaBotonQueHabriaPasado, mensaje_element, mostrarCarta, muestraCartaPorDefecto, muestraPuntuacion, boton_pedir_carta, boton_me_planto } from "./ui";
+import { partida } from "./model";
+import { creaBotonNuevaPartida, creaBotonQueHabriaPasado, mensaje_element, mostrarCarta, muestraCartaPorDefecto, muestraPuntuacion, boton_pedir_carta, boton_me_planto, muestraMensaje } from "./ui";
 
-
-let partidaAcabada: boolean = false;
 
 const gameOver = () => {
     if (boton_pedir_carta instanceof HTMLButtonElement && boton_me_planto instanceof HTMLButtonElement) {
@@ -12,14 +10,13 @@ const gameOver = () => {
         boton_me_planto.disabled = true
         boton_me_planto.className = "disabled-button";
         creaBotonQueHabriaPasado();
+        creaBotonNuevaPartida();
     };
     
-    if (mensaje_element && !partidaAcabada) {
-        cambiaMensaje("Has hecho más de 7 puntos y medio, partida terminada.");
-        partidaAcabada = true;
+    if (mensaje_element && !partida.partidaAcabada) {
+        partida.partidaAcabada = true;
     }
 
-    creaBotonNuevaPartida();
 };
 
 // Suma la puntuación de la carta
@@ -79,7 +76,7 @@ export const sumarPuntuacion = (carta: number) => {
         }
     }
 
-    cambiaPuntuacion(puntuacionCarta);
+    partida.puntuacion += puntuacionCarta;
     muestraPuntuacion();
 };
 
@@ -93,7 +90,9 @@ export const dameCarta = () => {
     mostrarCarta(nuevo_numero);
     sumarPuntuacion(nuevo_numero);
 
-    if (puntuacion > 7.5 && !partidaAcabada) {
+    if (mensaje_element && partida.puntuacion > 7.5 && !partida.partidaAcabada) {
+        partida.mensaje = "Has hecho más de 7 puntos y medio, partida terminada.";
+        muestraMensaje(); 
         gameOver();
     }
 };
@@ -103,23 +102,25 @@ export const dameCarta = () => {
 export const plantarse = () => {
     gameOver();
 
-    if (puntuacion === 7.5){
-        cambiaMensaje("¡Lo has clavado! ¡Enhorabuena!");
+    if (partida.puntuacion === 7.5){
+        partida.mensaje = "¡Lo has clavado! ¡Enhorabuena!";
     }
 
-    if (puntuacion === 6 || puntuacion === 7){
-        cambiaMensaje("Casi casi ...");
+    if (partida.puntuacion === 6 || partida.puntuacion === 7){
+        partida.mensaje = "Casi casi ...";
     }
 
-    if (puntuacion === 5){
-        cambiaMensaje("Te ha entrado el canguelo eh?");
+    if (partida.puntuacion === 5){
+        partida.mensaje = "Te ha entrado el canguelo eh?";
     }
 
-    if (puntuacion <= 4){
-        cambiaMensaje("Has sido muy conservador");
+    if (partida.puntuacion <= 4){
+        partida.mensaje = "Has sido muy conservador";
     }
 
-    creaBotonNuevaPartida;
+    if (mensaje_element) {
+        mensaje_element.innerHTML = partida.mensaje;
+    }
 };
 
 // Generar carta aleatoria
@@ -151,17 +152,21 @@ export const creaNuevaPartida = () => {
         boton_me_planto.className = "button";
     }
 
-    const boton_nueva_partida = document.getElementById("boton-nueva-partida");
-    const boton_que_habria_pasasdo = document.getElementById("boton-que-habria-pasado");
+    const boton_nueva_partida_element = document.getElementById("boton-nueva-partida");
+    const boton_que_habria_pasasdo_element = document.getElementById("boton-que-habria-pasado");
     
     // Elimina los botones nueva partida y que habria pasado
-    if (boton_nueva_partida instanceof HTMLButtonElement && boton_que_habria_pasasdo instanceof HTMLButtonElement) {
-        boton_nueva_partida.remove();
-        boton_que_habria_pasasdo.remove();
+    if (boton_nueva_partida_element instanceof HTMLButtonElement && boton_que_habria_pasasdo_element instanceof HTMLButtonElement) {
+        boton_nueva_partida_element.remove();
+        boton_que_habria_pasasdo_element.remove();
     }
 
-    
-    partidaPorDefecto();
+    partida.puntuacion = 0,
+    partida.carta = 0,
+    partida.mensaje = "",
+    partida.partidaAcabada = false
+
     muestraPuntuacion();
+    muestraMensaje();
     muestraCartaPorDefecto();
 };

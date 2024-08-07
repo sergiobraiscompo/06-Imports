@@ -10,6 +10,7 @@ export const handle_click = (boton: string) => {
         }
         case "mePlanto": {
             plantarse();
+            break;
         }
         case "queHabriaPasado": {
             queHabriaPasado();

@@ -1,17 +1,17 @@
-import { boton_nueva_partida, boton_que_habria_pasasdo, mensaje_element } from "./ui";
-
 // Objeto Partida
 interface Partida {
     puntuacion: number;
     carta: number;
     mensaje: string;
+    partidaAcabada: boolean
 }
 
 // Nueva partida
-export const nuevaPartida: Partida = {
+export const partida: Partida = {
     puntuacion: 0,
     carta: 0,
     mensaje: "",
+    partidaAcabada: false
 }
 
 // Cartas del juego
@@ -53,32 +53,3 @@ export const carta_img_element = document.getElementById("carta");
 
 // Carpeta de imágenes
 export const cartas_folder = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/";
-
-
-// Suma la puntuación de la carta
-export const cambiaPuntuacion = (nueva_puntuacion: number) => {
-    puntuacion += nueva_puntuacion;
-}
-
-export const cambiaMensaje = (mensajeRecibido: string) => {
-    if (mensaje_element) {
-        mensaje_element.innerHTML = mensajeRecibido;
-    }
-}
-
-export const partidaPorDefecto = () => {
-    puntuacion = nuevaPartida.puntuacion;
-    carta = nuevaPartida.carta;
-    puntuacion = nuevaPartida.puntuacion;
-
-    console.log(`Borrando botones innecesarios ${typeof(boton_nueva_partida)} ${typeof(boton_que_habria_pasasdo)}`)
-    // Elimina los botones nueva partida y que habria pasado
-    if (boton_nueva_partida instanceof HTMLButtonElement && boton_que_habria_pasasdo instanceof HTMLButtonElement) {
-        boton_nueva_partida.remove();
-        boton_que_habria_pasasdo.remove();
-    }
-}
-
-export let puntuacion = nuevaPartida.puntuacion;
-export let carta = nuevaPartida.carta;
-export let mensaje = nuevaPartida.mensaje;

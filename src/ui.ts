@@ -1,6 +1,6 @@
 import {
     carta_img_element, cartas_folder, 
-    puntuacion,
+    partida,
     as_copas, dos_copas, tres_copas, cuatro_copas,
     cinco_copas, seis_copas, siete_copas, sota_copas,
     caballo_copas, rey_copas, carta_boca_abajo
@@ -14,11 +14,6 @@ export const mensaje_element = document.getElementById("mensaje");
 export const tablero_element = document.getElementById("tablero");
 export const puntuacion_element = document.getElementById("puntuacion");
 export const contenedor_botones_element = document.getElementById("contenedor-botones");
-
-// Botones de la web
-export const boton_nueva_partida = document.getElementById("boton-nueva-partida");
-export const boton_que_habria_pasasdo = document.getElementById("boton-que-habria-pasado");
-
 
 // Botón pedir carta
 export const boton_pedir_carta = document.getElementById("pedir_carta");
@@ -40,9 +35,15 @@ export const muestraCartaPorDefecto = () => {
 
 // Función mostrar puntuación
 export const muestraPuntuacion = () => {
-
     if (puntuacion_element) {
-        puntuacion_element.innerHTML =  "Puntuación: "+ puntuacion.toString();
+        puntuacion_element.innerHTML =  "Puntuación: "+ partida.puntuacion.toString();
+    }
+};
+
+// Función mostrar puntuación
+export const muestraMensaje = () => {
+    if (mensaje_element) {
+        mensaje_element.innerHTML =  partida.mensaje;
     }
 };
 
