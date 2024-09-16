@@ -1,19 +1,19 @@
 import { partida } from "./model";
-import { creaBotonNuevaPartida, creaBotonQueHabriaPasado, mensaje_element, mostrarCarta, muestraCartaPorDefecto, muestraPuntuacion, boton_pedir_carta, boton_me_planto, muestraMensaje } from "./ui";
+import { creaBotonNuevaPartida, creaBotonQueHabriaPasado, mensajeElement, mostrarCarta, muestraCartaPorDefecto, muestraPuntuacion, botonPedirCarta, botonMePlanto, muestraMensaje } from "./ui";
 
 
 const gameOver = () => {
-    if (boton_pedir_carta instanceof HTMLButtonElement && boton_me_planto instanceof HTMLButtonElement) {
-        boton_pedir_carta.disabled = true
-        boton_pedir_carta.className = "disabled-button";
+    if (botonPedirCarta instanceof HTMLButtonElement && botonMePlanto instanceof HTMLButtonElement) {
+        botonPedirCarta.disabled = true
+        botonPedirCarta.className = "disabled-button";
 
-        boton_me_planto.disabled = true
-        boton_me_planto.className = "disabled-button";
+        botonMePlanto.disabled = true
+        botonMePlanto.className = "disabled-button";
         creaBotonQueHabriaPasado();
         creaBotonNuevaPartida();
     };
     
-    if (mensaje_element && !partida.partidaAcabada) {
+    if (mensajeElement && !partida.partidaAcabada) {
         partida.partidaAcabada = true;
     }
 
@@ -26,7 +26,7 @@ export const sumarPuntuacion = (carta: number) => {
    // Devualve el valor de la carta
     switch (carta) {
         case 1: {
-            puntuacionCarta= 1;
+            puntuacionCarta = 1;
             break;
         }
 
@@ -85,12 +85,12 @@ export const sumarPuntuacion = (carta: number) => {
 export const dameCarta = () => {
 
     // Llamada a la función recibir número aleatorio
-    let nuevo_numero = cartaAleatoria();
+    let nuevoNumero = cartaAleatoria();
 
-    mostrarCarta(nuevo_numero);
-    sumarPuntuacion(nuevo_numero);
+    mostrarCarta(nuevoNumero);
+    sumarPuntuacion(nuevoNumero);
 
-    if (mensaje_element && partida.puntuacion > 7.5 && !partida.partidaAcabada) {
+    if (mensajeElement && partida.puntuacion > 7.5 && !partida.partidaAcabada) {
         partida.mensaje = "Has hecho más de 7 puntos y medio, partida terminada.";
         muestraMensaje(); 
         gameOver();
@@ -118,8 +118,8 @@ export const plantarse = () => {
         partida.mensaje = "Has sido muy conservador";
     }
 
-    if (mensaje_element) {
-        mensaje_element.innerHTML = partida.mensaje;
+    if (mensajeElement) {
+        mensajeElement.innerHTML = partida.mensaje;
     }
 };
 
@@ -144,21 +144,21 @@ export const queHabriaPasado = () => {
 export const creaNuevaPartida = () => {
 
     // Habilita y cambia de nuevo la clase a "button" a los botones Pedir carta y me planto
-    if (boton_pedir_carta instanceof HTMLButtonElement && boton_me_planto instanceof HTMLButtonElement) {
-        boton_pedir_carta.disabled = false;
-        boton_pedir_carta.className = "button";
+    if (botonPedirCarta instanceof HTMLButtonElement && botonMePlanto instanceof HTMLButtonElement) {
+        botonPedirCarta.disabled = false;
+        botonPedirCarta.className = "button";
         
-        boton_me_planto.disabled = false;
-        boton_me_planto.className = "button";
+        botonMePlanto.disabled = false;
+        botonMePlanto.className = "button";
     }
 
-    const boton_nueva_partida_element = document.getElementById("boton-nueva-partida");
-    const boton_que_habria_pasasdo_element = document.getElementById("boton-que-habria-pasado");
+    const botonNuevaPartidaElement = document.getElementById("boton-nueva-partida");
+    const botonQueHabriaPasasdoElement = document.getElementById("boton-que-habria-pasado");
     
     // Elimina los botones nueva partida y que habria pasado
-    if (boton_nueva_partida_element instanceof HTMLButtonElement && boton_que_habria_pasasdo_element instanceof HTMLButtonElement) {
-        boton_nueva_partida_element.remove();
-        boton_que_habria_pasasdo_element.remove();
+    if (botonNuevaPartidaElement instanceof HTMLButtonElement && botonQueHabriaPasasdoElement instanceof HTMLButtonElement) {
+        botonNuevaPartidaElement.remove();
+        botonQueHabriaPasasdoElement.remove();
     }
 
     partida.puntuacion = 0,

@@ -1,145 +1,145 @@
 import {
-    carta_img_element, cartas_folder, 
+    cartaImgElement, cartasFolder, 
     partida,
-    as_copas, dos_copas, tres_copas, cuatro_copas,
-    cinco_copas, seis_copas, siete_copas, sota_copas,
-    caballo_copas, rey_copas, carta_boca_abajo
+    asCopas, dosCopas, tresCopas, cuatroCopas,
+    cincoCopas, seisCopas, sieteCopas, sotaCopas,
+    caballoCopas, reyCopas, cartaBocaAbajo
 } from "./model";
 
 import { creaNuevaPartida, queHabriaPasado } from "./motor";
-import { handle_click } from "./shell";
+import { handleClick } from "./shell";
 
 // Elementos HTML
-export const mensaje_element = document.getElementById("mensaje");
-export const tablero_element = document.getElementById("tablero");
-export const puntuacion_element = document.getElementById("puntuacion");
-export const contenedor_botones_element = document.getElementById("contenedor-botones");
+export const mensajeElement = document.getElementById("mensaje");
+export const tableroElement = document.getElementById("tablero");
+export const puntuacionElement = document.getElementById("puntuacion");
+export const contenedorBotonesElement = document.getElementById("contenedor-botones");
 
 // Botón pedir carta
-export const boton_pedir_carta = document.getElementById("pedir_carta");
-boton_pedir_carta?.addEventListener("click", () => handle_click("pedirCarta"));
+export const botonPedirCarta = document.getElementById("pedir_carta");
+botonPedirCarta?.addEventListener("click", () => handleClick("pedirCarta"));
 
 // Botón mePlanto
-export const boton_me_planto = document.getElementById("me_planto");
-boton_me_planto?.addEventListener("click", () => handle_click("mePlanto"));
+export const botonMePlanto = document.getElementById("me_planto");
+botonMePlanto?.addEventListener("click", () => handleClick("mePlanto"));
 
 
 
 // Muestra la parte trasera de las cartas
 export const muestraCartaPorDefecto = () => {
-    if (carta_img_element instanceof HTMLImageElement) {
-        carta_img_element.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/" + carta_boca_abajo;
+    if (cartaImgElement instanceof HTMLImageElement) {
+        cartaImgElement.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/" + cartaBocaAbajo;
     }
 };
 
 
 // Función mostrar puntuación
 export const muestraPuntuacion = () => {
-    if (puntuacion_element) {
-        puntuacion_element.innerHTML =  "Puntuación: "+ partida.puntuacion.toString();
+    if (puntuacionElement) {
+        puntuacionElement.innerHTML =  "Puntuación: "+ partida.puntuacion.toString();
     }
 };
 
 // Función mostrar puntuación
 export const muestraMensaje = () => {
-    if (mensaje_element) {
-        mensaje_element.innerHTML =  partida.mensaje;
+    if (mensajeElement) {
+        mensajeElement.innerHTML =  partida.mensaje;
     }
 };
 
 
 // Crea el botón nueva partida
 export const creaBotonNuevaPartida = () => {
-    const nueva_partida_boton = document.createElement("button");
-    nueva_partida_boton.innerText = "Nueva Partida";
-    nueva_partida_boton.id = "boton-nueva-partida";
-    nueva_partida_boton.className = "boton-nueva-partida";
-    nueva_partida_boton.onclick = () => creaNuevaPartida();
+    const nuevaPartidaBoton = document.createElement("button");
+    nuevaPartidaBoton.innerText = "Nueva Partida";
+    nuevaPartidaBoton.id = "boton-nueva-partida";
+    nuevaPartidaBoton.className = "boton-nueva-partida";
+    nuevaPartidaBoton.onclick = () => creaNuevaPartida();
 
     // Añadiendo el botón nueva partida en pantalla
-    contenedor_botones_element?.appendChild(nueva_partida_boton);
+    contenedorBotonesElement?.appendChild(nuevaPartidaBoton);
 };
 
 
 // Crea botón queHabriaPasado
 export const creaBotonQueHabriaPasado = () => {
-    const que_habria_pasado_boton = document.createElement("button");
+    const queHabriaPasadoBoton = document.createElement("button");
 
-    que_habria_pasado_boton.innerText = "¿Qué habría pasado?";
-    que_habria_pasado_boton.id = "boton-que-habria-pasado";
-    que_habria_pasado_boton.className = "boton-que-habria-pasado";
-    que_habria_pasado_boton.onclick = () => queHabriaPasado();
+    queHabriaPasadoBoton.innerText = "¿Qué habría pasado?";
+    queHabriaPasadoBoton.id = "boton-que-habria-pasado";
+    queHabriaPasadoBoton.className = "boton-que-habria-pasado";
+    queHabriaPasadoBoton.onclick = () => queHabriaPasado();
 
     // Añadiendo el botón nueva partida en pantalla
-    contenedor_botones_element?.appendChild(que_habria_pasado_boton);
+    contenedorBotonesElement?.appendChild(queHabriaPasadoBoton);
 };
 
 
 // Muestra la carta actual
 export const mostrarCarta = (carta: number) : void => {
 
-    let ruta_carta = "";
+    let rutaCarta = "";
 
     // Devolver carta aleatoria
     switch (carta) {
         case 1: {
-            ruta_carta = cartas_folder + as_copas;
+            rutaCarta = cartasFolder + asCopas;
             break;
         }
 
         case 2: {
-            ruta_carta = cartas_folder + dos_copas;
+            rutaCarta = cartasFolder + dosCopas;
             break;
         }
 
         case 3: {
-            ruta_carta = cartas_folder + tres_copas;
+            rutaCarta = cartasFolder + tresCopas;
             break;
         }
 
         case 4: {
-            ruta_carta = cartas_folder + cuatro_copas;
+            rutaCarta = cartasFolder + cuatroCopas;
             break;
         }
 
         case 5: {
-            ruta_carta = cartas_folder + cinco_copas;
+            rutaCarta = cartasFolder + cincoCopas;
             break;
         }
 
         case 6: {
-            ruta_carta = cartas_folder + seis_copas;
+            rutaCarta = cartasFolder + seisCopas;
             break;
         }
 
         case 7: {
-            ruta_carta = cartas_folder + siete_copas;
+            rutaCarta = cartasFolder + sieteCopas;
             break;
         }
 
         case 10: {
-            ruta_carta = cartas_folder + sota_copas;
+            rutaCarta = cartasFolder + sotaCopas;
             break;
         }
 
         case 11: {
-            ruta_carta = cartas_folder + caballo_copas;
+            rutaCarta = cartasFolder + caballoCopas;
             break;
         }
 
         case 12: {
-            ruta_carta = cartas_folder + rey_copas;
+            rutaCarta = cartasFolder + reyCopas;
             break;
         }
 
         default: {
-            ruta_carta = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/" + carta_boca_abajo;
+            rutaCarta = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/" + cartaBocaAbajo;
             break;
         }
     };
 
     // Condicional que comprueba que los elementos sean instancias de HTMLImageElement
-    if (carta_img_element instanceof HTMLImageElement) {
-            carta_img_element.src = ruta_carta;
+    if (cartaImgElement instanceof HTMLImageElement) {
+            cartaImgElement.src = rutaCarta;
     }
 };

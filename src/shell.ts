@@ -2,7 +2,7 @@ import { queHabriaPasado, dameCarta, plantarse } from "./motor";
 
 
 // Gestionar click
-export const handle_click = (boton: string) => {
+export const handleClick = (boton: string) => {
     switch (boton) {
         case "pedirCarta": {
             dameCarta();
