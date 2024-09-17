@@ -1,6 +1,6 @@
 import { partida } from "./model";
-import { creaBotonNuevaPartida, creaBotonQueHabriaPasado, mensajeElement, mostrarCarta, muestraCartaPorDefecto, muestraPuntuacion, botonPedirCarta, botonMePlanto, muestraMensaje } from "./ui";
-
+import { botonMePlanto, botonPedirCarta, mensajeElement } from "./constantes";
+import { creaBotonNuevaPartida, creaBotonQueHabriaPasado, mostrarCarta, muestraCartaPorDefecto, muestraMensaje, muestraPuntuacion, reiniciaBotones } from "./ui";
 
 const gameOver = () => {
     if (botonPedirCarta instanceof HTMLButtonElement && botonMePlanto instanceof HTMLButtonElement) {
@@ -102,19 +102,19 @@ export const dameCarta = () => {
 export const plantarse = () => {
     gameOver();
 
-    if (partida.puntuacion === 7.5){
+    if (partida.puntuacion === 7.5) {
         partida.mensaje = "¡Lo has clavado! ¡Enhorabuena!";
     }
 
-    if (partida.puntuacion === 6 || partida.puntuacion === 7){
+    if (partida.puntuacion === 6 || partida.puntuacion === 7) {
         partida.mensaje = "Casi casi ...";
     }
 
-    if (partida.puntuacion === 5){
+    if (partida.puntuacion === 5) {
         partida.mensaje = "Te ha entrado el canguelo eh?";
     }
 
-    if (partida.puntuacion <= 4){
+    if (partida.puntuacion <= 4) {
         partida.mensaje = "Has sido muy conservador";
     }
 
@@ -126,7 +126,8 @@ export const plantarse = () => {
 // Generar carta aleatoria
 export const cartaAleatoria = (): number => {
     let generarNumero = Math.floor(Math.random() * (12 - 1));
-    if (generarNumero != 0){
+
+    if (generarNumero != 0) {
         return generarNumero > 7
             ? generarNumero + 2
             : generarNumero;
@@ -135,38 +136,15 @@ export const cartaAleatoria = (): number => {
     }
 };
 
-// Función para ver las siguientes cartas tras terminar la partida
-export const queHabriaPasado = () => {
-    dameCarta();
-}
-
 // Crea una nueva partida
 export const creaNuevaPartida = () => {
-
-    // Habilita y cambia de nuevo la clase a "button" a los botones Pedir carta y me planto
-    if (botonPedirCarta instanceof HTMLButtonElement && botonMePlanto instanceof HTMLButtonElement) {
-        botonPedirCarta.disabled = false;
-        botonPedirCarta.className = "button";
-        
-        botonMePlanto.disabled = false;
-        botonMePlanto.className = "button";
-    }
-
-    const botonNuevaPartidaElement = document.getElementById("boton-nueva-partida");
-    const botonQueHabriaPasasdoElement = document.getElementById("boton-que-habria-pasado");
-    
-    // Elimina los botones nueva partida y que habria pasado
-    if (botonNuevaPartidaElement instanceof HTMLButtonElement && botonQueHabriaPasasdoElement instanceof HTMLButtonElement) {
-        botonNuevaPartidaElement.remove();
-        botonQueHabriaPasasdoElement.remove();
-    }
-
     partida.puntuacion = 0,
     partida.carta = 0,
     partida.mensaje = "",
     partida.partidaAcabada = false
-
-    muestraPuntuacion();
+    
     muestraMensaje();
+    reiniciaBotones();
+    muestraPuntuacion();
     muestraCartaPorDefecto();
 };
