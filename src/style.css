@@ -11,7 +11,7 @@ body {
   background-color: rgb(1, 104, 1);
 }
 
-.tablero-display {
+.tablero {
   border: dotted 5px white;
   display: flex;
   justify-content: space-around;

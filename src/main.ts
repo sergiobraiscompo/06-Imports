@@ -1,4 +1,5 @@
-import { muestraCartaPorDefecto, muestraPuntuacion } from "./ui";
+import { events } from "./shell";
+import { mostrarCarta, muestraPuntuacion } from "./ui";
 
-document.addEventListener("DOMContentLoaded", muestraCartaPorDefecto);
-document.addEventListener("DOMContentLoaded", muestraPuntuacion);
+document.addEventListener("DOMContentLoaded", () => { mostrarCarta(0), muestraPuntuacion(), events() });
+

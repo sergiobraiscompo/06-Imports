@@ -1,13 +1,13 @@
 // Elementos HTML
-export const cartaImgElement = document.getElementById("carta");
-export const mensajeElement = document.getElementById("mensaje");
-export const tableroElement = document.getElementById("tablero");
-export const puntuacionElement = document.getElementById("puntuacion");
-export const contenedorBotonesElement = document.getElementById("contenedor-botones");
+export const cartaImgElement = document.getElementById("carta") as HTMLImageElement;
+export const mensajeElement = document.getElementById("mensaje") as HTMLDivElement;
+export const tableroElement = document.getElementById("tablero") as HTMLDivElement;
+export const puntuacionElement = document.getElementById("puntuacion") as HTMLDivElement;
+export const contenedorBotonesElement = document.getElementById("contenedor-botones") as HTMLDivElement;
 
 // Botones acción
-export const botonMePlanto = document.getElementById("me_planto");
-export const botonPedirCarta = document.getElementById("pedir_carta");
+export const botonMePlanto = document.getElementById("me_planto") as HTMLButtonElement;
+export const botonPedirCarta = document.getElementById("pedir_carta") as HTMLButtonElement;
 
 // Cartas del juego
 export const cartas = [
