@@ -5,11 +5,9 @@ interface Partida {
     partidaAcabada: boolean
 }
 
-const partidaPorDefecto: Partida = {
+export const partida: Partida = {
     puntuacion: 0,
     carta: 0,
     mensaje: "",
     partidaAcabada: false
 }
-
-export const creaNuevaPartida = () => { const partida = new partidaPorDefecto}

@@ -1,5 +1,10 @@
-import { events } from "./shell";
-import { mostrarCarta, muestraPuntuacion } from "./ui";
+import { dameCarta, sumarPuntuacion } from "./motor";
+import "./shell";
+import { mostrarCarta } from "./ui";
 
-document.addEventListener("DOMContentLoaded", () => { mostrarCarta(0), muestraPuntuacion(), events() });
+export const handlePedirCarta = () => {
+    const nuevaCarta = dameCarta();
+    mostrarCarta(nuevaCarta);
 
+    sumarPuntuacion(nuevaCarta);
+}

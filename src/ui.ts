@@ -1,6 +1,6 @@
 import { botonMePlanto, botonPedirCarta, cartaImgElement, cartas, contenedorBotonesElement, mensajeElement, puntuacionElement } from "./constantes";
 import { partida } from "./model";
-import { creaNuevaPartida, queHabriaPasado } from "./motor";
+import { queHabriaPasado, reiniciaElementosPartida } from "./motor";
 
 export const muestraPuntuacion = () => {
     if (puntuacionElement) {
@@ -13,6 +13,19 @@ export const muestraMensaje = () => {
         mensajeElement.innerHTML = partida.mensaje;
     }
 };
+
+
+export const mostrarCarta = (carta: number): void => {
+
+    let rutaCarta = "";
+    rutaCarta = cartas[carta];
+
+    // Condicional que comprueba que los elementos sean instancias de HTMLImageElement
+    if (cartaImgElement && cartaImgElement != null && cartaImgElement != undefined) {
+        cartaImgElement.src = rutaCarta;
+    }
+};
+
 
 export const reiniciaBotones = () => {
     // Habilita y cambia de nuevo la clase a "button" a los botones Pedir carta y me planto
@@ -46,14 +59,12 @@ export const creaBotonNuevaPartida = () => {
     nuevaPartidaBoton.className = "boton-nueva-partida";
     nuevaPartidaBoton.onclick = () => creaNuevaPartida();
 
-    // Añadiendo el botón nueva partida en pantalla
     contenedorBotonesElement?.appendChild(nuevaPartidaBoton);
 };
 
 
 export const creaBotonQueHabriaPasado = () => {
     const queHabriaPasadoBoton = document.createElement("button");
-
     queHabriaPasadoBoton.innerText = "¿Qué habría pasado?";
     queHabriaPasadoBoton.id = "boton-que-habria-pasado";
     queHabriaPasadoBoton.className = "boton-que-habria-pasado";
@@ -62,13 +73,10 @@ export const creaBotonQueHabriaPasado = () => {
     contenedorBotonesElement?.appendChild(queHabriaPasadoBoton);
 };
 
-export const mostrarCarta = (carta: number): void => {
+export const creaNuevaPartida = () => {
+    reiniciaElementosPartida();
 
-    let rutaCarta = "";
-    rutaCarta = cartas[carta];
-
-    // Condicional que comprueba que los elementos sean instancias de HTMLImageElement
-    if (cartaImgElement && cartaImgElement != null && cartaImgElement != undefined) {
-        cartaImgElement.src = rutaCarta;
-    }
-};
+    muestraPuntuacion();
+    mostrarCarta(partida.carta)
+    muestraMensaje();
+}

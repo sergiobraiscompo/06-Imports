@@ -1,4 +1,3 @@
-import { botonMePlanto, botonPedirCarta } from "./constantes";
 import { partida } from "./model";
 
 const gameOver = () => {
@@ -74,46 +73,41 @@ export const dameCarta = () => {
     // Llamada a la función recibir número aleatorio
     let nuevoNumero = cartaAleatoria();
 
-    sumarPuntuacion(nuevoNumero);
-
-    if (partida.puntuacion > 7.5 && !partida.partidaAcabada) {
-        partida.mensaje = "Has hecho más de 7 puntos y medio, partida terminada.";
-        gameOver();
-    }
+    return nuevoNumero;
 };
 
 
 // Llama a gameover y muestra un mensaje en pantalla
 export const plantarse = () => {
-    gameOver();
+    if (partida.puntuacion > 7.5 && !partida.partidaAcabada) {
+        partida.mensaje = "Has hecho más de 7 puntos y medio, partida terminada.";
+        gameOver();
+    }
 
     if (partida.puntuacion === 7.5) {
         partida.mensaje = "¡Lo has clavado! ¡Enhorabuena!";
+        gameOver();
     }
 
     if (partida.puntuacion === 6 || partida.puntuacion === 7) {
         partida.mensaje = "Casi casi ...";
+        gameOver();
     }
 
     if (partida.puntuacion === 5) {
         partida.mensaje = "Te ha entrado el canguelo eh?";
+        gameOver();
     }
 
     if (partida.puntuacion <= 4) {
         partida.mensaje = "Has sido muy conservador";
+        gameOver();
     }
 };
 
-// Generar carta aleatoria
 export const cartaAleatoria = (): number => {
-    let generarNumero = Math.floor(Math.random() * (12 - 1));
-    if (generarNumero != 0) {
-        return generarNumero > 7
-            ? generarNumero + 2
-            : generarNumero;
-    } else {
-        return generarNumero + 1;
-    }
+    let generarNumero = Math.floor(Math.random() * (10 - 1));
+    return generarNumero;
 };
 
 // Función para ver las siguientes cartas tras terminar la partida
@@ -121,3 +115,9 @@ export const queHabriaPasado = () => {
     dameCarta();
 }
 
+export const reiniciaElementosPartida = () => {
+    partida.puntuacion = 0;
+    partida.carta = 0;
+    partida.mensaje = "";
+    partida.partidaAcabada = false;
+}
