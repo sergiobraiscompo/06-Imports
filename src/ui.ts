@@ -1,6 +1,27 @@
 import { botonMePlanto, botonPedirCarta, cartaImgElement, cartas, contenedorBotonesElement, mensajeElement, puntuacionElement } from "./constantes";
+import { handleCreaNuevaPartida, handleQueHabriaPasado } from "./main";
 import { partida } from "./model";
-import { queHabriaPasado, reiniciaElementosPartida } from "./motor";
+
+const creaBotonNuevaPartida = () => {
+    const nuevaPartidaBoton = document.createElement("button");
+    nuevaPartidaBoton.innerText = "Nueva Partida";
+    nuevaPartidaBoton.id = "boton-nueva-partida";
+    nuevaPartidaBoton.className = "boton-nueva-partida";
+    nuevaPartidaBoton.onclick = () => handleCreaNuevaPartida();
+
+    contenedorBotonesElement?.appendChild(nuevaPartidaBoton);
+};
+
+
+const creaBotonQueHabriaPasado = () => {
+    const queHabriaPasadoBoton = document.createElement("button");
+    queHabriaPasadoBoton.innerText = "¿Qué habría pasado?";
+    queHabriaPasadoBoton.id = "boton-que-habria-pasado";
+    queHabriaPasadoBoton.className = "boton-que-habria-pasado";
+    queHabriaPasadoBoton.onclick = () => handleQueHabriaPasado();
+
+    contenedorBotonesElement?.appendChild(queHabriaPasadoBoton);
+};
 
 export const muestraPuntuacion = () => {
     if (puntuacionElement) {
@@ -16,19 +37,38 @@ export const muestraMensaje = () => {
 
 
 export const mostrarCarta = (carta: number): void => {
-
-    let rutaCarta = "";
-    rutaCarta = cartas[carta];
-
     // Condicional que comprueba que los elementos sean instancias de HTMLImageElement
     if (cartaImgElement && cartaImgElement != null && cartaImgElement != undefined) {
-        cartaImgElement.src = rutaCarta;
+        cartaImgElement.src = cartas[carta];
     }
 };
 
 
-export const reiniciaBotones = () => {
-    // Habilita y cambia de nuevo la clase a "button" a los botones Pedir carta y me planto
+export const gestionaBotonesPartidaTerminada = () => {
+    // Habilita botones "pedir carta" y "plantarse"
+    if (
+        botonPedirCarta && botonPedirCarta != null && botonPedirCarta != undefined &&
+        botonMePlanto && botonMePlanto != null && botonMePlanto != undefined
+    ) {
+    
+        botonPedirCarta.disabled = true;
+        botonPedirCarta.className = "disabled-button";
+
+        botonMePlanto.disabled = true;
+        botonMePlanto.className = "disabled-button";
+    }
+
+    // Crea los botones "nueva partida" y "que habría pasado"
+    try {
+        creaBotonNuevaPartida();
+        creaBotonQueHabriaPasado();
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const reiniciaBotones = () => {
+    // Deshabilita botones "pedir carta" y "plantarse"
     if (
         botonPedirCarta && botonPedirCarta != null && botonPedirCarta != undefined &&
         botonMePlanto && botonMePlanto != null && botonMePlanto != undefined
@@ -39,10 +79,11 @@ export const reiniciaBotones = () => {
         botonMePlanto.disabled = false;
         botonMePlanto.className = "button";
     }
-
+    
+    // Elimina botones "nueva partida" y "que habría pasado"
     const botonNuevaPartidaElement = document.getElementById("boton-nueva-partida");
     const botonQueHabriaPasadoElement = document.getElementById("boton-que-habria-pasado");
-    // Elimina los botones nueva partida y que habria pasado
+   
     if (
         botonNuevaPartidaElement && botonNuevaPartidaElement != null && botonNuevaPartidaElement != undefined &&
         botonQueHabriaPasadoElement && botonQueHabriaPasadoElement != null && botonQueHabriaPasadoElement != undefined
@@ -52,30 +93,8 @@ export const reiniciaBotones = () => {
     }
 }
 
-export const creaBotonNuevaPartida = () => {
-    const nuevaPartidaBoton = document.createElement("button");
-    nuevaPartidaBoton.innerText = "Nueva Partida";
-    nuevaPartidaBoton.id = "boton-nueva-partida";
-    nuevaPartidaBoton.className = "boton-nueva-partida";
-    nuevaPartidaBoton.onclick = () => creaNuevaPartida();
-
-    contenedorBotonesElement?.appendChild(nuevaPartidaBoton);
-};
-
-
-export const creaBotonQueHabriaPasado = () => {
-    const queHabriaPasadoBoton = document.createElement("button");
-    queHabriaPasadoBoton.innerText = "¿Qué habría pasado?";
-    queHabriaPasadoBoton.id = "boton-que-habria-pasado";
-    queHabriaPasadoBoton.className = "boton-que-habria-pasado";
-    queHabriaPasadoBoton.onclick = () => queHabriaPasado();
-
-    contenedorBotonesElement?.appendChild(queHabriaPasadoBoton);
-};
-
-export const creaNuevaPartida = () => {
-    reiniciaElementosPartida();
-
+export const creaNuevaInterfazPartida = () => {
+    reiniciaBotones();
     muestraPuntuacion();
     mostrarCarta(partida.carta)
     muestraMensaje();

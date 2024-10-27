@@ -1,7 +1,6 @@
 import { botonMePlanto, botonPedirCarta } from "./constantes"
-import { handlePedirCarta } from "./main";
-import { plantarse } from "./motor"
-import { creaNuevaPartida } from "./ui";
+import { handlePedirCarta, handlePlantarse } from "./main";
+import { creaNuevaInterfazPartida } from "./ui";
 
 export const events = () => {
     if (
@@ -9,8 +8,8 @@ export const events = () => {
         botonPedirCarta && botonPedirCarta != undefined && botonPedirCarta != null
     ) {
         botonPedirCarta.addEventListener("click", handlePedirCarta);
-        botonMePlanto.addEventListener("click", plantarse)
+        botonMePlanto.addEventListener("click", handlePlantarse)
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => { creaNuevaPartida(), events() });
+document.addEventListener("DOMContentLoaded", () => { creaNuevaInterfazPartida(), events() });
