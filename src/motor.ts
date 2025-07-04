@@ -90,7 +90,7 @@ export const dameCarta = () => {
     mostrarCarta(nuevo_numero);
     sumarPuntuacion(nuevo_numero);
 
-    if (mensaje_element && partida.puntuacion > 7.5 && !partida.partidaAcabada) {
+    if (mensaje_element && mensaje_element != null && mensaje_element != undefined && partida.puntuacion > 7.5 && !partida.partidaAcabada) {
         partida.mensaje = "Has hecho más de 7 puntos y medio, partida terminada.";
         muestraMensaje(); 
         gameOver();
@@ -106,7 +106,7 @@ export const plantarse = () => {
         partida.mensaje = "¡Lo has clavado! ¡Enhorabuena!";
     }
 
-    if (partida.puntuacion === 6 || partida.puntuacion === 7){
+    if (partida.puntuacion >= 6 || partida.puntuacion <= 7){
         partida.mensaje = "Casi casi ...";
     }
 
@@ -118,7 +118,7 @@ export const plantarse = () => {
         partida.mensaje = "Has sido muy conservador";
     }
 
-    if (mensaje_element) {
+    if (mensaje_element && mensaje_element != null && mensaje_element != undefined) {
         mensaje_element.innerHTML = partida.mensaje;
     }
 };
@@ -138,13 +138,22 @@ export const cartaAleatoria = (): number => {
 // Función para ver las siguientes cartas tras terminar la partida
 export const queHabriaPasado = () => {
     dameCarta();
+    
+    const boton_que_habria_pasado = document.getElementById("boton-que-habria-pasado");
+    console.log("boton que habria pasado existe") 
+    if (boton_que_habria_pasado instanceof HTMLButtonElement && boton_que_habria_pasado != null && boton_que_habria_pasado != undefined) {
+        boton_que_habria_pasado.disabled = true;
+        boton_que_habria_pasado.disabled = true;
+        boton_que_habria_pasado.className = "disabled-button"
+        console.log("Boton que habria pasado deshabilitado")
+    }
 }
 
 // Crea una nueva partida
 export const creaNuevaPartida = () => {
 
     // Habilita y cambia de nuevo la clase a "button" a los botones Pedir carta y me planto
-    if (boton_pedir_carta instanceof HTMLButtonElement && boton_me_planto instanceof HTMLButtonElement) {
+    if (boton_pedir_carta instanceof HTMLButtonElement && boton_pedir_carta != undefined && boton_pedir_carta != null && boton_me_planto instanceof HTMLButtonElement && boton_me_planto != null && boton_me_planto != undefined) {
         boton_pedir_carta.disabled = false;
         boton_pedir_carta.className = "button";
         
@@ -156,7 +165,7 @@ export const creaNuevaPartida = () => {
     const boton_que_habria_pasasdo_element = document.getElementById("boton-que-habria-pasado");
     
     // Elimina los botones nueva partida y que habria pasado
-    if (boton_nueva_partida_element instanceof HTMLButtonElement && boton_que_habria_pasasdo_element instanceof HTMLButtonElement) {
+    if (boton_nueva_partida_element instanceof HTMLButtonElement && boton_nueva_partida_element != null && boton_nueva_partida_element != undefined && boton_que_habria_pasasdo_element instanceof HTMLButtonElement) {
         boton_nueva_partida_element.remove();
         boton_que_habria_pasasdo_element.remove();
     }

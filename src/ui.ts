@@ -27,7 +27,7 @@ boton_me_planto?.addEventListener("click", () => handle_click("mePlanto"));
 
 // Muestra la parte trasera de las cartas
 export const muestraCartaPorDefecto = () => {
-    if (carta_img_element instanceof HTMLImageElement) {
+    if (carta_img_element instanceof HTMLImageElement && carta_img_element != undefined && carta_img_element != null) {
         carta_img_element.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/" + carta_boca_abajo;
     }
 };
@@ -35,14 +35,14 @@ export const muestraCartaPorDefecto = () => {
 
 // Función mostrar puntuación
 export const muestraPuntuacion = () => {
-    if (puntuacion_element) {
+    if (puntuacion_element && puntuacion_element != undefined && puntuacion_element != null) {
         puntuacion_element.innerHTML =  "Puntuación: "+ partida.puntuacion.toString();
     }
 };
 
 // Función mostrar puntuación
 export const muestraMensaje = () => {
-    if (mensaje_element) {
+    if (mensaje_element && mensaje_element != undefined && mensaje_element != null) {
         mensaje_element.innerHTML =  partida.mensaje;
     }
 };
