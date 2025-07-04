@@ -1,19 +1,17 @@
 import {
-    carta_img_element, cartas_folder, 
-    partida,
-    as_copas, dos_copas, tres_copas, cuatro_copas,
-    cinco_copas, seis_copas, siete_copas, sota_copas,
-    caballo_copas, rey_copas, carta_boca_abajo
+    cartas,
+    partida
 } from "./model";
 
 import { creaNuevaPartida, queHabriaPasado } from "./motor";
 import { handle_click } from "./shell";
 
 // Elementos HTML
-export const mensaje_element = document.getElementById("mensaje");
-export const tablero_element = document.getElementById("tablero");
-export const puntuacion_element = document.getElementById("puntuacion");
-export const contenedor_botones_element = document.getElementById("contenedor-botones");
+export const mensajeElement = document.getElementById("mensaje");
+export const tableroElement = document.getElementById("tablero");
+export const puntuacionElement = document.getElementById("puntuacion");
+export const contenedorBotonesElement = document.getElementById("contenedor-botones");
+const cartaImgElement = document.getElementById("carta");
 
 // Botón pedir carta
 export const boton_pedir_carta = document.getElementById("pedir_carta");
@@ -24,26 +22,25 @@ export const boton_me_planto = document.getElementById("me_planto");
 boton_me_planto?.addEventListener("click", () => handle_click("mePlanto"));
 
 
-
 // Muestra la parte trasera de las cartas
 export const muestraCartaPorDefecto = () => {
-    if (carta_img_element instanceof HTMLImageElement && carta_img_element != undefined && carta_img_element != null) {
-        carta_img_element.src = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/" + carta_boca_abajo;
+    if (cartaImgElement instanceof HTMLImageElement && cartaImgElement != undefined && cartaImgElement != null) {
+        cartaImgElement.src = cartas[0];
     }
 };
 
 
 // Función mostrar puntuación
 export const muestraPuntuacion = () => {
-    if (puntuacion_element && puntuacion_element != undefined && puntuacion_element != null) {
-        puntuacion_element.innerHTML =  "Puntuación: "+ partida.puntuacion.toString();
+    if (puntuacionElement && puntuacionElement != undefined && puntuacionElement != null) {
+        puntuacionElement.innerHTML =  "Puntuación: "+ partida.puntuacion.toString();
     }
 };
 
 // Función mostrar puntuación
 export const muestraMensaje = () => {
-    if (mensaje_element && mensaje_element != undefined && mensaje_element != null) {
-        mensaje_element.innerHTML =  partida.mensaje;
+    if (mensajeElement && mensajeElement != undefined && mensajeElement != null) {
+        mensajeElement.innerHTML =  partida.mensaje;
     }
 };
 
@@ -57,7 +54,7 @@ export const creaBotonNuevaPartida = () => {
     nueva_partida_boton.onclick = () => creaNuevaPartida();
 
     // Añadiendo el botón nueva partida en pantalla
-    contenedor_botones_element?.appendChild(nueva_partida_boton);
+    contenedorBotonesElement?.appendChild(nueva_partida_boton);
 };
 
 
@@ -71,7 +68,7 @@ export const creaBotonQueHabriaPasado = () => {
     que_habria_pasado_boton.onclick = () => queHabriaPasado();
 
     // Añadiendo el botón nueva partida en pantalla
-    contenedor_botones_element?.appendChild(que_habria_pasado_boton);
+    contenedorBotonesElement?.appendChild(que_habria_pasado_boton);
 };
 
 
@@ -83,63 +80,63 @@ export const mostrarCarta = (carta: number) : void => {
     // Devolver carta aleatoria
     switch (carta) {
         case 1: {
-            ruta_carta = cartas_folder + as_copas;
+            ruta_carta = cartas[1];
             break;
         }
 
         case 2: {
-            ruta_carta = cartas_folder + dos_copas;
+            ruta_carta = cartas[2];
             break;
         }
 
         case 3: {
-            ruta_carta = cartas_folder + tres_copas;
+            ruta_carta = cartas[3];
             break;
         }
 
         case 4: {
-            ruta_carta = cartas_folder + cuatro_copas;
+            ruta_carta = cartas[4];
             break;
         }
 
         case 5: {
-            ruta_carta = cartas_folder + cinco_copas;
+            ruta_carta = cartas[5];
             break;
         }
 
         case 6: {
-            ruta_carta = cartas_folder + seis_copas;
+            ruta_carta = cartas[6];
             break;
         }
 
         case 7: {
-            ruta_carta = cartas_folder + siete_copas;
+            ruta_carta = cartas[7];
             break;
         }
 
         case 10: {
-            ruta_carta = cartas_folder + sota_copas;
+            ruta_carta = cartas[8];
             break;
         }
 
         case 11: {
-            ruta_carta = cartas_folder + caballo_copas;
+            ruta_carta = cartas[9];
             break;
         }
 
         case 12: {
-            ruta_carta = cartas_folder + rey_copas;
+            ruta_carta = cartas[10];
             break;
         }
 
         default: {
-            ruta_carta = "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/" + carta_boca_abajo;
+            ruta_carta = cartas[0];
             break;
         }
     };
 
     // Condicional que comprueba que los elementos sean instancias de HTMLImageElement
-    if (carta_img_element instanceof HTMLImageElement) {
-            carta_img_element.src = ruta_carta;
+    if (cartaImgElement instanceof HTMLImageElement) {
+            cartaImgElement.src = ruta_carta;
     }
 };

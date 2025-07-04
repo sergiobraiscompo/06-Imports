@@ -1,5 +1,5 @@
 import { partida } from "./model";
-import { creaBotonNuevaPartida, creaBotonQueHabriaPasado, mensaje_element, mostrarCarta, muestraCartaPorDefecto, muestraPuntuacion, boton_pedir_carta, boton_me_planto, muestraMensaje } from "./ui";
+import { creaBotonNuevaPartida, creaBotonQueHabriaPasado, mensajeElement, mostrarCarta, muestraCartaPorDefecto, muestraPuntuacion, boton_pedir_carta, boton_me_planto, muestraMensaje } from "./ui";
 
 
 const gameOver = () => {
@@ -13,7 +13,7 @@ const gameOver = () => {
         creaBotonNuevaPartida();
     };
     
-    if (mensaje_element && !partida.partidaAcabada) {
+    if (mensajeElement && mensajeElement != undefined && mensajeElement != null && !partida.partidaAcabada) {
         partida.partidaAcabada = true;
     }
 
@@ -90,7 +90,7 @@ export const dameCarta = () => {
     mostrarCarta(nuevo_numero);
     sumarPuntuacion(nuevo_numero);
 
-    if (mensaje_element && mensaje_element != null && mensaje_element != undefined && partida.puntuacion > 7.5 && !partida.partidaAcabada) {
+    if (mensajeElement && mensajeElement != null && mensajeElement != undefined && partida.puntuacion > 7.5 && !partida.partidaAcabada) {
         partida.mensaje = "Has hecho más de 7 puntos y medio, partida terminada.";
         muestraMensaje(); 
         gameOver();
@@ -118,8 +118,8 @@ export const plantarse = () => {
         partida.mensaje = "Has sido muy conservador";
     }
 
-    if (mensaje_element && mensaje_element != null && mensaje_element != undefined) {
-        mensaje_element.innerHTML = partida.mensaje;
+    if (mensajeElement && mensajeElement != null && mensajeElement != undefined) {
+        mensajeElement.innerHTML = partida.mensaje;
     }
 };
 
